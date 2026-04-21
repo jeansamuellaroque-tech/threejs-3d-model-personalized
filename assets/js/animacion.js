@@ -52,6 +52,18 @@ export function initAnimations(model) {
 
 }
 
+window.playAnim = function(key) {
+
+    const action = actions[key];
+
+    if (!action) return;
+
+    if (activeAction) activeAction.fadeOut(0.5);
+
+    action.reset().fadeIn(0.5).play();
+    activeAction = action;
+};
+
 // 🎮 ACTIVAR TECLADO (SOLO CUANDO TODO ESTÁ LISTO)
 function enableKeyboard() {
 
