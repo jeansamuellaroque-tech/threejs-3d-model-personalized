@@ -1,126 +1,154 @@
-# 🎮 Intro Three.js – Carga de modelo FBX
+# 🎮 Mixamo Animation Viewer con Three.js
 
-## 📌 Descripción
+## 📌 Descripción del Proyecto
 
-Este proyecto implementa una escena de graficación 3D en la web utilizando Three.js.
+Este proyecto consiste en una aplicación web interactiva desarrollada con **Three.js**, que permite visualizar un modelo 3D animado utilizando múltiples animaciones provenientes de Mixamo.
 
-Se carga un modelo 3D en formato **FBX** (Samba Dancing) con animación, demostrando el uso de **FBXLoader**, iluminación básica y renderizado en tiempo real con WebGL.
-
----
-
-## 📁 Estructura del proyecto
-
-```id="tree01"
-intro-threejs/
-│
-├── index.html              # Página principal
-│
-└── assets/
-    ├── build/              # Núcleo de Three.js
-    │   ├── three.core.js
-    │   └── three.module.js
-    │
-    ├── css/
-    │   └── main.css        # Estilos
-    │
-    ├── js/
-    │   └── main.js         # Lógica principal 3D
-    │
-    ├── jsm/
-    │   ├── controls/       # Controles de cámara
-    │   ├── curves/         # Utilidades matemáticas
-    │   ├── libs/           # Librerías auxiliares
-    │   └── loaders/
-    │       └── FBXLoader.js  # Carga de modelos FBX
-    │
-    └── models/
-        └── fbx/
-            ├── Samba Dancing.fbx        # Animación de baile
-            ├── Walking.fbx              # Caminar
-            ├── Walking Backwards.fbx    # Caminar hacia atrás
-            ├── Running.fbx              # Correr
-            ├── Jump.fbx                 # Saltar
-```
-
----
-
-## ⚙️ Funcionamiento
-
-El proyecto funciona de la siguiente manera:
-
-1. `index.html`:
-
-   * Define el entorno web
-   * Configura **importmap** para usar módulos de Three.js
-   * Carga `main.js`
-
-2. `main.js`:
-
-   * Crea la escena (`Scene`)
-   * Configura la cámara (`Camera`)
-   * Inicializa el renderizador (`WebGLRenderer`)
-   * Agrega luces
-   * Usa `FBXLoader` para cargar el modelo
-   * Ejecuta la animación
-
----
-
-## 🚀 Ejecución
-
-### ✔️ Recomendado: Live Server
-
-1. Abrir en Visual Studio Code
-2. Instalar **Live Server**
-3. Ejecutar `index.html`
-
----
-
-### ✔️ Alternativa: Servidor local
-
-```bash id="run01"
-python -m http.server
-```
-
-Abrir en navegador:
-
-```id="run02"
-http://localhost:8000
-```
+El usuario puede cambiar entre diferentes movimientos del personaje mediante el teclado o botones en pantalla, con transiciones suaves entre animaciones.
 
 ---
 
 ## 🎯 Objetivos
 
-* Comprender el uso de Three.js
-* Cargar modelos 3D en formato FBX
-* Aplicar animaciones
-* Entender la estructura de un proyecto 3D web
-* Implementar renderizado en tiempo real
+* Integrar modelos 3D con animaciones en una página web
+* Utilizar Three.js para renderizado en tiempo real
+* Implementar control de animaciones mediante teclado
+* Aplicar transiciones suaves entre movimientos
+* Diseñar una interfaz moderna con efecto *glassmorphism*
 
 ---
 
-## 🧠 Conceptos aplicados
+## 🧰 Tecnologías utilizadas
 
-* Coordenadas 3D (X, Y, Z)
-* Transformaciones (rotación, escala, traslación)
-* Iluminación básica
-* Renderizado WebGL
-* Carga de modelos externos
-
----
-
-## 🎨 Recursos
-
-* Modelo obtenido de Mixamo
-* Librería principal: Three.js
+* JavaScript (ES Modules)
+* Three.js
+* FBXLoader
+* HTML5
+* CSS3 (Glassmorphism)
+* Bootstrap 5
 
 ---
 
-## ⚠️ Notas importantes
+## 📁 Estructura del Proyecto
 
-* No abrir directamente `index.html` sin servidor (problemas con módulos ES)
-* Requiere navegador moderno (Chrome, Edge, Firefox)
-* Puede tardar en cargar dependiendo del modelo FBX
+```
+assets/
+│
+├── build/              # Librerías Three.js
+├── css/
+│   └── main.css        # Estilos (glassmorphism)
+│
+├── js/
+│   ├── main.js         # Escena principal
+│   └── animacion.js    # Control de animaciones
+│
+├── jsm/                # Addons de Three.js
+│
+└── models/
+    └── fbx/
+        ├── character.fbx
+        ├── Crouch To Stand.fbx
+        ├── Taunt.fbx
+        ├── Mma Kick.fbx
+        ├── Fall flat.fbx
+        └── Breakdance 1990.fbx
+
+index.html
+README.md
+```
+
+---
+
+## ⚙️ Instalación y ejecución
+
+### 1. Clonar o descargar el proyecto
+
+```
+git clone <url-del-repositorio>
+```
+
+---
+
+### 2. Abrir con servidor local
+
+Es necesario usar un servidor para evitar errores de carga:
+
+* Usar extensión **Live Server** en VS Code
+* O ejecutar un servidor local
+
+---
+
+### 3. Ejecutar
+
+Abrir:
+
+```
+index.html
+```
+
+---
+
+## 🎮 Controles
+
+| Tecla | Acción          |
+| ----- | --------------- |
+| 1     | Crouch To Stand |
+| 2     | Taunt           |
+| 3     | MMA Kick        |
+| 4     | Fall Flat       |
+| 5     | Breakdance 1990 |
+
+También puedes usar los botones en pantalla.
+
+---
+
+## 🎥 Funcionamiento
+
+1. Se carga el modelo base (`character.fbx`)
+2. Se cargan animaciones externas (sin skin)
+3. Se crea un `AnimationMixer`
+4. Cada animación se asigna a una tecla
+5. Se aplican transiciones suaves (`fadeIn / fadeOut`)
+
+---
+
+## 🎨 Interfaz
+
+La interfaz utiliza un diseño moderno con efecto **glassmorphism**, incluyendo:
+
+* Navbar superior
+* Panel de controles flotante
+* Botones interactivos
+* Footer informativo
+
+---
+
+## ⚠️ Problemas comunes
+
+### ❌ Animaciones no cargan
+
+* Verificar rutas (`./assets/models/fbx/`)
+* Verificar nombres exactos de archivos
+
+### ❌ Teclas no funcionan
+
+* Asegurarse de que las animaciones terminaron de cargar
+* Usar teclas numéricas superiores (no numpad)
+
+### ❌ Modelo no visible
+
+* Ajustar escala del modelo
+* Ajustar posición de la cámara
+
+---
+
+## 🚀 Posibles mejoras
+
+* Movimiento del personaje con teclado (WASD)
+* Sistema de cámara dinámica
+* Interfaz tipo videojuego
+* Carga de modelos GLTF (más optimizado)
+* Sistema de estados de animación
 
 ---
 
@@ -128,22 +156,11 @@ http://localhost:8000
 
 **Jean Samuel Laroque**
 
----
-
-## ✨ Resultado esperado
-
-* Visualización de un personaje 3D animado
-* Renderizado fluido en navegador
-* Interacción básica con la escena (según implementación)
+Proyecto académico utilizando Three.js y animaciones de Mixamo.
 
 ---
 
-## 📚 Referencias
+## 📄 Licencia
 
-* https://threejs.org/docs/
-* https://threejs.org/examples/
-* https://www.mixamo.com/
-
----
-
-🚀 Proyecto académico de introducción a la graficación 3D.
+Este proyecto es de uso educativo.
+Las animaciones pertenecen a Mixamo (Adobe).
